@@ -2,12 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tw.org.iii.leo.leo13">
 
-    <application
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<!--    要做網路一定要先開權限 跟存取網路狀態權限-->
+<!--    android:usesCleartextTraffic="true" 使用明碼傳送 （http 就是用明碼）-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<!--    權限； 讀外部寫外部儲存 因為要讀寫到APP外的手機上-->
+<application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -16,6 +24,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--    這個provider本身就是安著內的物件實體-->
+    <provider
+        android:authorities="${applicationId}.provider"
+        android:name="androidx.core.content.FileProvider"
+        android:exported="false"
+        android:grantUriPermissions="true"
+        >
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/provider_paths"
+            />
+
+    </provider>
     </application>
 
 </manifest>
