@@ -246,6 +246,15 @@ public class MainActivity extends AppCompatActivity {
 
     private UIHandler uiHandler = new UIHandler();
 
+    public void test6(View view) {
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT,"Sharing URL");
+        intent.putExtra(Intent.EXTRA_TEXT,"http://www.url.com");
+
+        startActivity(Intent.createChooser(intent,"Share URL"));
+    }
 
 
     private class UIHandler extends Handler{
